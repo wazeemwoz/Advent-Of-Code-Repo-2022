@@ -6,7 +6,7 @@ import (
 
 func Solution3(filepath string) int {
 	score := 0
-	file.WithFileDo(filepath, func(entry string) {
+	file.ForEachLine(filepath, func(entry string) {
 		score += findDuplicates(entry[0:len(entry)/2], entry[len(entry)/2:])
 	})
 	return score
@@ -14,15 +14,8 @@ func Solution3(filepath string) int {
 
 func Solution3_1(filepath string) int {
 	score := 0
-	lineCount := 0
-	rucksacks := make([]string, 3)
-	file.WithFileDo(filepath, func(entry string) {
-		index := lineCount % len(rucksacks)
-		rucksacks[index] = entry
-		if index == len(rucksacks)-1 {
-			score += findDuplicates(rucksacks...)
-		}
-		lineCount++
+	file.ForGroupLines(filepath, 3, func(entries []string) {
+		score += findDuplicates(entries...)
 	})
 	return score
 }

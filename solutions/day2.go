@@ -29,7 +29,7 @@ func Solution2(strategy map[string](map[string]int)) func(string) int {
 	return func(filepath string) int {
 		score := 0
 
-		file.WithFileDo(filepath, func(entry string) {
+		file.ForEachLine(filepath, func(entry string) {
 			moves := strings.Split(entry, " ")
 
 			score += strategy[moves[1]][moves[0]]

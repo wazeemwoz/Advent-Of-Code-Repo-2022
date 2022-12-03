@@ -29,7 +29,7 @@ func Solution1(topK int) func(string) int {
 		top := make([]int, topK)
 		runningCount := 0
 
-		file.WithFileDo(filepath, func(entry string) {
+		file.ForEachLine(filepath, func(entry string) {
 			if len(entry) > 0 {
 				cals, _ := strconv.Atoi(entry)
 				runningCount += cals
