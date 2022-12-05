@@ -13,5 +13,5 @@ func main() {
 
 	answer := Solutions[solution](filePath)
 
-	fmt.Printf("Solution is: %d \n", answer)
+	fmt.Println("Solution is: " + answer)
 }

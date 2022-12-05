@@ -28,7 +28,7 @@ func CountOverlapping(unions int, sizeLeft int, sizeRight int) int {
 func Solution4(scoringStrategy func(int, int, int) int) func(string) int {
 	return func(filepath string) int {
 		score := 0
-		file.ForEachLine(filepath, func(entry string) {
+		file.NewStream(filepath).ForEach(func(entry string) {
 			left, right := lineToRanges(entry)
 
 			union := left.unions(right)

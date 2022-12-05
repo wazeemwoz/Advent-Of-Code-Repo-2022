@@ -6,7 +6,7 @@ import (
 
 func Solution3(filepath string) int {
 	score := 0
-	file.ForEachLine(filepath, func(entry string) {
+	file.NewStream(filepath).ForEach(func(entry string) {
 		score += findDuplicates(entry[0:len(entry)/2], entry[len(entry)/2:])
 	})
 	return score
@@ -14,7 +14,7 @@ func Solution3(filepath string) int {
 
 func Solution3_1(filepath string) int {
 	score := 0
-	file.ForGroupLines(filepath, 3, func(entries []string) {
+	file.NewStream(filepath).ForGroup(3, func(entries []string) {
 		score += findDuplicates(entries...)
 	})
 	return score
