@@ -33,7 +33,8 @@ func registerSolutions() map[string](func(string) string) {
 	registered["4"] = asStr(solutions.Solution4(solutions.CountContained))
 	registered["4.1"] = asStr(solutions.Solution4(solutions.CountOverlapping))
 
-	registered["5"] = solutions.Solution5
+	registered["5"] = solutions.Solution5(solutions.MoveOneByOne)
+	registered["5.1"] = solutions.Solution5(solutions.MoveTogether)
 
 	return registered
 }
