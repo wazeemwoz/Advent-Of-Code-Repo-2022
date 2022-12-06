@@ -6,18 +6,20 @@ import (
 	"github.com/wazeemwoz/advent2022/file"
 )
 
-func Solution6(filepath string) int {
-	fileStream := file.NewStream(filepath)
+func Solution6(size int) func(string) int {
+	return func(filepath string) int {
+		fileStream := file.NewStream(filepath)
 
-	lastSet := make([]string, 4)
-	index := 0
+		lastSet := make([]string, size)
+		index := 0
 
-	fileStream.ForEachChar(func(entry string) bool {
-		lastSet[index%len(lastSet)] = entry
-		index++
-		return !isUnique(lastSet)
-	})
-	return index
+		fileStream.ForEachChar(func(entry string) bool {
+			lastSet[index%len(lastSet)] = entry
+			index++
+			return !isUnique(lastSet)
+		})
+		return index
+	}
 }
 
 func isUnique(set []string) bool {
