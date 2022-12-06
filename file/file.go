@@ -59,3 +59,19 @@ func (stream Stream) ForGroup(groupSize int, consumer func([]string)) {
 		lineCount++
 	})
 }
+
+func (stream Stream) ForEachChar(consumer func(string) bool) {
+	defer stream.file.Close()
+
+	scanner := stream.scanner
+
+	scanner.Split(bufio.ScanRunes)
+	keepGoing := true
+	for scanner.Scan() && keepGoing {
+		keepGoing = consumer(scanner.Text())
+	}
+
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+}
