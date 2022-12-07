@@ -39,5 +39,8 @@ func registerSolutions() map[string](func(string) string) {
 	registered["6"] = asStr(solutions.Solution6(4))
 	registered["6.1"] = asStr(solutions.Solution6(14))
 
+	registered["7"] = asStr(solutions.Solution7(solutions.FilteredSize))
+	registered["7.1"] = asStr(solutions.Solution7(solutions.FindUnder))
+
 	return registered
 }
