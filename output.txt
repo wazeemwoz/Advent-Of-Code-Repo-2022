@@ -1,0 +1,2 @@
+Running solution 9.1 with file input.txt 
+Solution is: 1
