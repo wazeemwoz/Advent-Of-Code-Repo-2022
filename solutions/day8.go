@@ -2,20 +2,16 @@ package solutions
 
 import (
 	"github.com/wazeemwoz/advent2022/file"
+	. "github.com/wazeemwoz/advent2022/types"
 	"github.com/wazeemwoz/advent2022/utils"
 )
 
-type coord struct {
-	x int
-	y int
-}
-
 func Solution8(filepath string) int {
 	grid := fileToGrid(filepath)
-	visibileMap := make(map[coord]bool)
+	visibileMap := make(map[Coord]bool)
 	visibility := 0
-	loopGrid(grid, func(current coord, stoppedAt coord) {
-		if stoppedAt.x < 0 || stoppedAt.x == len(grid[0]) || stoppedAt.y < 0 || stoppedAt.y == len(grid) {
+	loopGrid(grid, func(current Coord, stoppedAt Coord) {
+		if stoppedAt.X < 0 || stoppedAt.X == len(grid[0]) || stoppedAt.Y < 0 || stoppedAt.Y == len(grid) {
 			if !visibileMap[current] {
 				visibility++
 				visibileMap[current] = true
@@ -35,35 +31,35 @@ func Solution8_1(filepath string) int {
 		}
 	}
 	visibility := 0
-	loopGrid(grid, func(current coord, stoppedAt coord) {
-		stoppedAt.x = utils.Max(stoppedAt.x, 0)
-		stoppedAt.x = utils.Min(stoppedAt.x, len(grid[0])-1)
-		stoppedAt.y = utils.Max(stoppedAt.y, 0)
-		stoppedAt.y = utils.Min(stoppedAt.y, len(grid)-1)
-		visibileMap[current.y][current.x] *= (utils.Abs(current.x-stoppedAt.x) + utils.Abs(current.y-stoppedAt.y))
-		visibility = utils.Max(visibileMap[current.y][current.x], visibility)
+	loopGrid(grid, func(current Coord, stoppedAt Coord) {
+		stoppedAt.X = utils.Max(stoppedAt.X, 0)
+		stoppedAt.X = utils.Min(stoppedAt.X, len(grid[0])-1)
+		stoppedAt.Y = utils.Max(stoppedAt.Y, 0)
+		stoppedAt.Y = utils.Min(stoppedAt.Y, len(grid)-1)
+		visibileMap[current.Y][current.X] *= (utils.Abs(current.X-stoppedAt.X) + utils.Abs(current.Y-stoppedAt.Y))
+		visibility = utils.Max(visibileMap[current.Y][current.X], visibility)
 	})
 	return visibility
 }
 
-func loopGrid(grid [][]int, fnStopper func(current coord, next coord)) {
-	expander := func(x int, y int, direction coord) {
-		next := coord{direction.x + x, direction.y + y}
-		for !(next.x < 0 || next.x >= len(grid[0]) || next.y < 0 || next.y >= len(grid)) {
-			if grid[y][x] <= grid[next.y][next.x] {
+func loopGrid(grid [][]int, fnStopper func(current Coord, next Coord)) {
+	expander := func(x int, y int, direction Coord) {
+		next := Coord{direction.X + x, direction.Y + y}
+		for !(next.X < 0 || next.X >= len(grid[0]) || next.Y < 0 || next.Y >= len(grid)) {
+			if grid[y][x] <= grid[next.Y][next.X] {
 				break
 			}
-			next = coord{direction.x + next.x, direction.y + next.y}
+			next = Coord{direction.X + next.X, direction.Y + next.Y}
 		}
-		fnStopper(coord{x, y}, next)
+		fnStopper(Coord{x, y}, next)
 	}
 
 	for y := 0; y < len(grid); y++ {
 		for x := 0; x < len(grid[y]); x++ {
-			expander(x, y, coord{1, 0})
-			expander(x, y, coord{-1, 0})
-			expander(x, y, coord{0, 1})
-			expander(x, y, coord{0, -1})
+			expander(x, y, Coord{1, 0})
+			expander(x, y, Coord{-1, 0})
+			expander(x, y, Coord{0, 1})
+			expander(x, y, Coord{0, -1})
 		}
 	}
 }

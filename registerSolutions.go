@@ -45,5 +45,6 @@ func registerSolutions() map[string](func(string) string) {
 	registered["8"] = asStr(solutions.Solution8)
 	registered["8.1"] = asStr(solutions.Solution8_1)
 
+	registered["9"] = asStr(solutions.Solution9)
 	return registered
 }
