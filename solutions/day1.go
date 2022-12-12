@@ -4,18 +4,10 @@ import (
 	"strconv"
 
 	"github.com/wazeemwoz/advent2022/file"
+	. "github.com/wazeemwoz/advent2022/utils"
 )
 
 func Solution1(topK int) func(string) int {
-	updateTop := func(list []int, val int) {
-		newVal := val
-		for i, v := range list {
-			if newVal > v {
-				list[i] = newVal
-				newVal = v
-			}
-		}
-	}
 
 	sum := func(list []int) int {
 		result := 0
@@ -34,11 +26,11 @@ func Solution1(topK int) func(string) int {
 				cals, _ := strconv.Atoi(entry)
 				runningCount += cals
 			} else {
-				updateTop(top, runningCount)
+				UpdateTop(top, runningCount)
 				runningCount = 0
 			}
 		})
-		updateTop(top, runningCount)
+		UpdateTop(top, runningCount)
 
 		return sum(top)
 	}

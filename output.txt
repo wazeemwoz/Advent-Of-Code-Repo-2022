@@ -1,2 +1,2 @@
-Running solution 9.1 with file input.txt 
-Solution is: 1
+Running solution 11 with file input.txt 
+Solution is: 10605

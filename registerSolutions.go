@@ -49,5 +49,11 @@ func registerSolutions() map[string](func(string) string) {
 	registered["9.1"] = asStr(solutions.Solution9(10))
 
 	registered["10"] = asStr(solutions.Solution10)
+
+	registered["11"] = asStr(solutions.Solution11(20, solutions.Divide(3)))
+	registered["11.1"] = asStr(solutions.Solution11(10000, solutions.Modulo))
+
+	registered["12"] = asStr(solutions.Solution12(solutions.FromStartingPosition))
+	registered["12.1"] = asStr(solutions.Solution12(solutions.FromBestStartingPosition))
 	return registered
 }
